@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Data
 @Entity
 @Table(name="PESSOA")
@@ -13,6 +15,7 @@ public class Pessoa {
     @Column(updatable = false)
     private Integer id;
 
+    @JsonProperty("name")
     private String nome;
 
     private String cpf;
