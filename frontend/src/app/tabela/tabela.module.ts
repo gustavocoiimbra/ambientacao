@@ -10,7 +10,6 @@ import { FormularioComponent } from './formulario/formulario.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PessoasListComponent } from './pessoas-list/pessoas-list.component';
 
-
 @NgModule({
   declarations: [
     TabelaComponent,

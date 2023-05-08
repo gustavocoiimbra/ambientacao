@@ -12,6 +12,8 @@ export class PessoasListComponent implements OnInit {
   @Input() public data: Users[] = [];
   @Output() public add = new EventEmitter(false);
   @Output() public edit = new EventEmitter(false);
+  @Output() public delete = new EventEmitter(false);
+  @Output() public filter = new EventEmitter(false);
   public displayedColumns = ['name', 'cpf', 'actions'];
 
   constructor() {}
@@ -24,6 +26,14 @@ export class PessoasListComponent implements OnInit {
 
   public onEdit(data: Users) {
     this.edit.emit(data);
+  }
+
+  public onDelete(data: Users) {
+    this.delete.emit(data);
+  }
+
+  public applyFilter(name: string) {
+    this.filter.emit(name);
   }
 
 }

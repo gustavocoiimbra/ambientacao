@@ -24,19 +24,20 @@ export class UsersService {
   public saveData(newPessoa: Users) {
     console.log(newPessoa.id)
     if(newPessoa.id) {
-      console.log("Update")
       return this.update(newPessoa);
     }
-    console.log("Create")
     return this.create(newPessoa);
   }
 
   private create(newPessoa: Partial<Users>) {
-    console.log(newPessoa)
     return this.httpClient.post<Users>(this.API, newPessoa);
   }
 
   private update(newPessoa: Partial<Users>) {
     return this.httpClient.put<Users>(`${this.API}/${newPessoa.id}`, newPessoa);
+  }
+
+  public delete(id: string) {
+    return this.httpClient.delete(`${this.API}/${id}`);
   }
 }

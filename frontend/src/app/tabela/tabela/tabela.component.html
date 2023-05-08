@@ -13,6 +13,7 @@
                 *ngIf="dataUsers | async as data; else loading" [data]="data"
                 (add)="onAdd()"
                 (edit)="onEdit($event)"
+                (delete)="onDelete($event)"
                 ></app-pessoas-list>
 
                 <ng-template #loading>

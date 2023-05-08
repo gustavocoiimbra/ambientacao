@@ -1,8 +1,21 @@
 .mat-table {
     overflow: auto;
     max-width: 600px;
-}
+    text-align: center}
 
 .action-col {
     flex: 0 0 75px;
 }
+
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }

@@ -5,6 +5,7 @@ import { Observable, catchError, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 
 
 @Component({
@@ -46,6 +47,30 @@ export class TabelaComponent implements OnInit {
 
   public onEdit(data: Users) {
     this.router.navigate(['edit', data.id], {relativeTo: this.route});
+  }
+
+  public onDelete(data: Users) {
+    const dialogRef = this.dialog.open(DialogComponent);
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if(result) {
+        this.dataUserService.delete(data.id).subscribe(
+          () => this.refresh()
+        );
+      }
+    })
+      
+    
+  }
+
+  public refresh() {
+
+    this.dataUsers = this.dataUserService.getUsers().pipe(
+      catchError(error => {
+        console.log(error)
+        this.onError('Erro ao carregar os usuários.')
+        return of([])
+      }));
   }
  
   ngOnInit(): void {
