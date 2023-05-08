@@ -1,6 +1,6 @@
 export interface Users {
 
-    _id: string;
+    id: string;
     name: string;
     cpf: string;
     

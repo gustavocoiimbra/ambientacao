@@ -1,0 +1,28 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Adicionar usuário</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="form">
+        <mat-card-content>
+            <p>
+                <mat-form-field class="full-width">
+                <mat-label>Digite o nome</mat-label>
+                <input matInput formControlName="name">
+                </mat-form-field>
+            </p>
+    
+            <p>
+                <mat-form-field class="full-width">
+                <mat-label>Digite o CPF</mat-label>
+                <input matInput formControlName="cpf">
+                </mat-form-field>
+            </p>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+            <button mat-button (click)="onCancel()">Cancelar</button>
+          </mat-card-actions>
+    </form>
+</mat-card>

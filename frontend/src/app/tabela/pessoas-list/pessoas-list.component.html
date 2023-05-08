@@ -1,0 +1,25 @@
+<mat-table [dataSource]="data">
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+            <mat-cell *matCellDef="let data">{{ data.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cpf">
+        <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
+            <mat-cell *matCellDef="let data">{{ data.cpf }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef class="action-col">Ações</mat-header-cell>
+
+        <mat-cell *matCellDef="let data" class="action-col">
+            <button mat-icon-button color="primary" aria-label="Editar usuários"><mat-icon (click)="onEdit(data)">edit</mat-icon></button>
+            <button mat-icon-button color="primary" aria-label="Excluir usuários"><mat-icon>delete</mat-icon></button>
+        </mat-cell>
+        
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
