@@ -1,0 +1,30 @@
+<mat-form-field>
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter('name')" placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<mat-table [dataSource]="data">
+
+    <ng-container matColumnDef="name" class="full-width">
+        <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+            <mat-cell *matCellDef="let data">{{ data.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cpf" class="full-width">
+        <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
+            <mat-cell *matCellDef="let data">{{ data.cpf }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" class="full-width">
+        <mat-header-cell *matHeaderCellDef class="action-col">Ações</mat-header-cell>
+
+        <mat-cell *matCellDef="let data" class="action-col">
+            <button mat-icon-button color="primary" aria-label="Editar usuários"><mat-icon (click)="onEdit(data)">edit</mat-icon></button>
+            <button mat-icon-button color="primary" aria-label="Excluir usuários"><mat-icon (click)="onDelete(data)">delete</mat-icon></button>
+        </mat-cell>
+        
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

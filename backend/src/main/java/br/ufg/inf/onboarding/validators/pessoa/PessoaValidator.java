@@ -2,9 +2,6 @@ package br.ufg.inf.onboarding.validators.pessoa;
 
 import br.ufg.inf.onboarding.model.Pessoa;
 import br.ufg.inf.onboarding.validators.ValidationUtils;
-import org.apache.logging.log4j.util.Strings;
-import org.springframework.context.annotation.Bean;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
