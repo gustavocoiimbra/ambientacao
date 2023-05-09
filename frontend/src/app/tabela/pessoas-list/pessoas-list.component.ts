@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Users } from 'src/app/models/users.interface';
 
 
@@ -13,12 +14,14 @@ export class PessoasListComponent implements OnInit {
   @Output() public add = new EventEmitter(false);
   @Output() public edit = new EventEmitter(false);
   @Output() public delete = new EventEmitter(false);
-  @Output() public filter = new EventEmitter(false);
   public displayedColumns = ['name', 'cpf', 'actions'];
+  public datas: MatTableDataSource<Users> = new MatTableDataSource;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.datas = new MatTableDataSource(this.data);
+  }
 
   public onAdd() {
     this.add.emit(true);
@@ -32,8 +35,12 @@ export class PessoasListComponent implements OnInit {
     this.delete.emit(data);
   }
 
-  public applyFilter(name: string) {
-    this.filter.emit(name);
-  }
+  public applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.datas.filter = filterValue.trim().toLowerCase();
 
+    if (this.datas.paginator) {
+      this.datas.paginator.firstPage();
+    }
+  }
 }

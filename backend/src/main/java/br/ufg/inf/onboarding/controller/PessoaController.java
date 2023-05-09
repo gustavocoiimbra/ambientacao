@@ -23,8 +23,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PessoaController {
 
-    private final PessoaRepository pessoaRepository;
-    
+    private final PessoaRepository pessoaRepository;    
+
     @GetMapping
     public List<Pessoa> list() {
         return (List<Pessoa>) pessoaRepository.findAll();

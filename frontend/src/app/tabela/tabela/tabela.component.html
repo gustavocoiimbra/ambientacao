@@ -2,6 +2,7 @@
     <button mat-raised-button color="primary" (click)="onAdd()">Adicionar usuários</button>
 </div>
 
+<app-profile></app-profile>
 <mat-card>
     <mat-card-content>
 
@@ -15,13 +16,13 @@
                 (edit)="onEdit($event)"
                 (delete)="onDelete($event)"
                 ></app-pessoas-list>
-
+                
                 <ng-template #loading>
                     <div class="loading-spinner">
                         <mat-spinner></mat-spinner>
                     </div>
                 </ng-template>
-
+    
             </div>
 
     </mat-card-content>
