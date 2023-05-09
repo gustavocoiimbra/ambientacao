@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
-
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-tabela',
@@ -16,15 +16,14 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
 export class TabelaComponent implements OnInit {
 
   public dataUsers: Observable<Users[]>;
-  displayedColumns = ['name', 'cpf', 'actions'];
-
-  
+  public listUsers: MatTableDataSource<Users> = new MatTableDataSource();
+  public displayedColumns = ['name', 'cpf', 'actions'];
 
   constructor(
     private dataUserService: UsersService,
     public dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
     ) {
 
     this.dataUsers = this.dataUserService.getUsers().pipe(
@@ -33,23 +32,28 @@ export class TabelaComponent implements OnInit {
         this.onError('Erro ao carregar os usuários.')
         return of([])
       }));
+
+    this.dataUserService.getUsers().subscribe(
+      resposta => this.listUsers = new MatTableDataSource(resposta)
+    );
    }
 
-  public onError(errorMessage: string) {
+  public onError(errorMessage: string): void {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMessage
       });
   }
 
-  public onAdd() {
+  public onAdd(): void {
     this.router.navigate(['new'], {relativeTo: this.route});
   }
 
-  public onEdit(data: Users) {
+  public onEdit(data: Users): void {
+    console.log(this,this.listUsers)
     this.router.navigate(['edit', data.id], {relativeTo: this.route});
   }
 
-  public onDelete(data: Users) {
+  public onDelete(data: Users): void {
     const dialogRef = this.dialog.open(DialogComponent);
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
@@ -59,12 +63,9 @@ export class TabelaComponent implements OnInit {
         );
       }
     })
-      
-    
   }
 
-  public refresh() {
-
+  public refresh(): void {
     this.dataUsers = this.dataUserService.getUsers().pipe(
       catchError(error => {
         console.log(error)
@@ -73,8 +74,6 @@ export class TabelaComponent implements OnInit {
       }));
   }
  
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
 }
