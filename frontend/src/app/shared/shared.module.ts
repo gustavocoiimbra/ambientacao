@@ -6,7 +6,6 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 
-
 @NgModule({
   declarations: [
     ErrorDialogComponent,

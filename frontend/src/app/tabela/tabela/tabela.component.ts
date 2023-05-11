@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Users } from 'src/app/models/users.interface';
-import { UsersService } from 'src/app/services/users.service';
+import { ConsultaAPIService } from 'src/app/services/consulta-api.service';
 import { Observable, catchError, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
@@ -15,28 +15,20 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class TabelaComponent implements OnInit {
 
-  public dataUsers: Observable<Users[]>;
+  public dataUsers!: Observable<Users[]>;
   public listUsers: MatTableDataSource<Users> = new MatTableDataSource();
   public displayedColumns = ['name', 'cpf', 'actions'];
 
   constructor(
-    private dataUserService: UsersService,
+    private dataUserService: ConsultaAPIService,
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    ) {
-
-    this.dataUsers = this.dataUserService.getUsers().pipe(
-      catchError(error => {
-        console.log(error)
-        this.onError('Erro ao carregar os usuários.')
-        return of([])
-      }));
-
-    this.dataUserService.getUsers().subscribe(
-      resposta => this.listUsers = new MatTableDataSource(resposta)
-    );
-   }
+    ) { }
+  
+  public ngOnInit(): void {
+    this.refresh();
+  }
 
   public onError(errorMessage: string): void {
     this.dialog.open(ErrorDialogComponent, {
@@ -49,7 +41,6 @@ export class TabelaComponent implements OnInit {
   }
 
   public onEdit(data: Users): void {
-    console.log(this,this.listUsers)
     this.router.navigate(['edit', data.id], {relativeTo: this.route});
   }
 
@@ -62,18 +53,14 @@ export class TabelaComponent implements OnInit {
           () => this.refresh()
         );
       }
-    })
+    });
   }
 
   public refresh(): void {
     this.dataUsers = this.dataUserService.getUsers().pipe(
-      catchError(error => {
-        console.log(error)
+      catchError(() => {
         this.onError('Erro ao carregar os usuários.')
         return of([])
       }));
   }
- 
-  ngOnInit(): void {}
-
 }

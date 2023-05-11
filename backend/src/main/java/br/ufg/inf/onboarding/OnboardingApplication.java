@@ -23,7 +23,7 @@ public class OnboardingApplication {
 			pessoaRepository.deleteAll();
 			Pessoa c = new Pessoa();
 			c.setNome("Lucas");
-			c.setCpf("123456789");
+			c.setCpf("12345678900");
 			pessoaRepository.save(c);
 
 		}; 

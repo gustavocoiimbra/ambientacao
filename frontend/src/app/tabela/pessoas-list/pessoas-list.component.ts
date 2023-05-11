@@ -1,26 +1,34 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Users } from 'src/app/models/users.interface';
-
 
 @Component({
   selector: 'app-pessoas-list',
   templateUrl: './pessoas-list.component.html',
   styleUrls: ['./pessoas-list.component.scss']
 })
-export class PessoasListComponent implements OnInit {
+export class PessoasListComponent implements AfterViewInit, OnInit {
 
   @Input() public data: Users[] = [];
   @Output() public add = new EventEmitter(false);
   @Output() public edit = new EventEmitter(false);
   @Output() public delete = new EventEmitter(false);
+  
   public displayedColumns = ['name', 'cpf', 'actions'];
   public datas: MatTableDataSource<Users> = new MatTableDataSource;
 
-  constructor() {}
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.datas = new MatTableDataSource(this.data);
+    this.datas = new MatTableDataSource(this.data);    
+  }
+
+  ngAfterViewInit(): void {
+    this.datas.sort = this.sort;
+    this.datas.paginator = this.paginator;   
   }
 
   public onAdd() {

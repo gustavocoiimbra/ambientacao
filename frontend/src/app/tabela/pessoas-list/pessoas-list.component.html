@@ -7,12 +7,12 @@
     <mat-table [dataSource]="datas" matSort>
 
         <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header="name">Nome</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header matSortDirection="asc">Nome</mat-header-cell>
                 <mat-cell *matCellDef="let datas">{{ datas.name }}</mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="cpf" class="full-width">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>CPF</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
                 <mat-cell *matCellDef="let datas">{{ datas.cpf }}</mat-cell>
         </ng-container>
     
@@ -30,7 +30,7 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
         <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">Nenhum registro encontrado para "{{input.value}}"</td>
+            <td class="mat-cell" colspan="4">Nenhum registro encontrado</td>
           </tr>
 
     </mat-table>

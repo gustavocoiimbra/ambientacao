@@ -3,15 +3,12 @@ package br.ufg.inf.onboarding.validators;
 import br.ufg.inf.onboarding.builders.DataFaker;
 import br.ufg.inf.onboarding.builders.PessoaBuilder;
 import br.ufg.inf.onboarding.model.Pessoa;
-import br.ufg.inf.onboarding.validators.pessoa.BeforeCreatePessoaValidator;
 import br.ufg.inf.onboarding.validators.pessoa.PessoaValidator;
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.test.util.AssertionErrors;
+
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 

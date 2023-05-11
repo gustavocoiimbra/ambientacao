@@ -5,14 +5,14 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Users } from 'src/app/models/users.interface';
-import { UsersService } from 'src/app/services/users.service';
+import { ConsultaAPIService } from 'src/app/services/consulta-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PessoasResolver implements Resolve<Users> {
 
-  constructor(private service: UsersService) {}
+  constructor(private service: ConsultaAPIService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Users> {
     if(route.params && route.params['id']) {
