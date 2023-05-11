@@ -1,9 +1,6 @@
 package br.ufg.inf.onboarding.validators;
 
-import org.apache.logging.log4j.util.Strings;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 
 public abstract class ValidationUtils extends org.springframework.validation.ValidationUtils {

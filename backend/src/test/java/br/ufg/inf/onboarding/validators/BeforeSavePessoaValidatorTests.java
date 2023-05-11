@@ -2,7 +2,6 @@ package br.ufg.inf.onboarding.validators;
 
 import br.ufg.inf.onboarding.builders.PessoaBuilder;
 import br.ufg.inf.onboarding.model.Pessoa;
-import br.ufg.inf.onboarding.validators.pessoa.BeforeCreatePessoaValidator;
 import br.ufg.inf.onboarding.validators.pessoa.BeforeSavePessoaValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
