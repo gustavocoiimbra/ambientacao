@@ -4,8 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConsultaAPIService } from 'src/app/services/consulta-api.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Users } from 'src/app/models/users.interface';
 import { ValidarCpf } from 'src/app/models/validar-cpf';
+import { Pessoas } from 'src/app/models/pessoa.interface';
+import { TabelaComponent } from '../tabela/tabela.component';
 
 @Component({
   selector: 'app-formulario',
@@ -15,10 +16,11 @@ import { ValidarCpf } from 'src/app/models/validar-cpf';
 export class FormularioComponent implements OnInit {
 
   public form: FormGroup;
+  public refresh!: TabelaComponent;
 
   constructor(
     private formBuilder: FormBuilder,
-    private userSerice: ConsultaAPIService,
+    private consultaService: ConsultaAPIService,
     private snackBar: MatSnackBar,
     private location: Location,
     private route: ActivatedRoute,
@@ -32,7 +34,7 @@ export class FormularioComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    const user: Users = this.route.snapshot.data['pessoas'];
+    const user: Pessoas = this.route.snapshot.data['pessoas'];
     this.form.setValue({
       id: user.id,
       name: user.name,
@@ -42,12 +44,13 @@ export class FormularioComponent implements OnInit {
 
   public onSubmit(): void {
     if(!this.form.invalid) {
-      this.userSerice.saveData(this.form.value).subscribe(
+      this.consultaService.saveData(this.form.value).subscribe(
         () => {
           this.activateSnackBar(false);
         },
         () => this.activateSnackBar(true)); 
       this.onCancel();
+      this.refresh.carregarPessoas();
     }
   }
 

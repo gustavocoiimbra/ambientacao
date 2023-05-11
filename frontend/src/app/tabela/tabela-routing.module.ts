@@ -6,7 +6,7 @@ import { PessoasResolver } from './guards/pessoas.resolver';
 
 const routes: Routes = [
   { path: '', component: TabelaComponent },
-  { path: 'new', component: FormularioComponent, resolve: { pessoas: PessoasResolver} },
+  { path: 'create', component: FormularioComponent, resolve: { pessoas: PessoasResolver} },
   { path: 'edit/:id', component: FormularioComponent, resolve: { pessoas: PessoasResolver} }
 ];
 

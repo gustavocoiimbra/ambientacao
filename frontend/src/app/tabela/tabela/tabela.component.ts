@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Users } from 'src/app/models/users.interface';
 import { ConsultaAPIService } from 'src/app/services/consulta-api.service';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { Pessoas } from 'src/app/models/pessoa.interface';
 
 @Component({
   selector: 'app-tabela',
@@ -15,19 +16,19 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class TabelaComponent implements OnInit {
 
-  public dataUsers!: Observable<Users[]>;
+  public dataUsers!: Observable<Users>;
   public listUsers: MatTableDataSource<Users> = new MatTableDataSource();
   public displayedColumns = ['name', 'cpf', 'actions'];
 
   constructor(
-    private dataUserService: ConsultaAPIService,
+    private consultaService: ConsultaAPIService,
     public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
     ) { }
   
   public ngOnInit(): void {
-    this.refresh();
+    this.carregarPessoas();
   }
 
   public onError(errorMessage: string): void {
@@ -37,30 +38,25 @@ export class TabelaComponent implements OnInit {
   }
 
   public onAdd(): void {
-    this.router.navigate(['new'], {relativeTo: this.route});
+    this.router.navigate(['create'], {relativeTo: this.route});
   }
 
-  public onEdit(data: Users): void {
+  public onEdit(data: Pessoas): void {
     this.router.navigate(['edit', data.id], {relativeTo: this.route});
   }
 
-  public onDelete(data: Users): void {
+  public onDelete(data: Pessoas): void {
     const dialogRef = this.dialog.open(DialogComponent);
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if(result) {
-        this.dataUserService.delete(data.id).subscribe(
-          () => this.refresh()
+        this.consultaService.delete(data.id).subscribe(
+          () => this.carregarPessoas()
         );
-      }
-    });
+    }});
   }
 
-  public refresh(): void {
-    this.dataUsers = this.dataUserService.getUsers().pipe(
-      catchError(() => {
-        this.onError('Erro ao carregar os usuários.')
-        return of([])
-      }));
+  public carregarPessoas(): void {
+    this.dataUsers = this.consultaService.getUsers();
   }
 }

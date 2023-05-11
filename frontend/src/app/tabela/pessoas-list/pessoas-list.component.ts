@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, ViewChild, AfterViewIni
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Pessoas } from 'src/app/models/pessoa.interface';
 import { Users } from 'src/app/models/users.interface';
 
 @Component({
@@ -11,19 +12,19 @@ import { Users } from 'src/app/models/users.interface';
 })
 export class PessoasListComponent implements AfterViewInit, OnInit {
 
-  @Input() public data: Users[] = [];
+  @Input() public data!: Users;
   @Output() public add = new EventEmitter(false);
   @Output() public edit = new EventEmitter(false);
   @Output() public delete = new EventEmitter(false);
   
   public displayedColumns = ['name', 'cpf', 'actions'];
-  public datas: MatTableDataSource<Users> = new MatTableDataSource;
+  public datas: MatTableDataSource<Pessoas> = new MatTableDataSource;
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.datas = new MatTableDataSource(this.data);    
+    this.datas = new MatTableDataSource(this.data._embedded.pessoas);
   }
 
   ngAfterViewInit(): void {
@@ -35,7 +36,7 @@ export class PessoasListComponent implements AfterViewInit, OnInit {
     this.add.emit(true);
   }
 
-  public onEdit(data: Users) {
+  public onEdit(data: Pessoas) {
     this.edit.emit(data);
   }
 
