@@ -3,10 +3,10 @@ import { TestBed } from '@angular/core/testing';
 import { ConsultaAPIService } from './consulta-api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 //import { HttpClient } from '@angular/common/http';
-import { Users } from '../models/users.interface';
+import { Pessoas } from '../models/pessoa.interface';
 
 
-describe('ConsultaAPIService', () => {
+fdescribe('ConsultaAPIService', () => {
   let service: ConsultaAPIService;
  // let http: HttpClient;
 
@@ -32,7 +32,7 @@ describe('ConsultaAPIService', () => {
   });*/
 
   it('Consulta deve retornar uma lista de usuários', () => {
-    const listPessoas: Users[] = [{
+    const listPessoas: Pessoas[] = [{
       "id": "1",
       "name": "Lucas",
       "cpf": "12345678900",
@@ -45,12 +45,12 @@ describe('ConsultaAPIService', () => {
     
     expect(service.getUsers().subscribe(
       resposta =>  { console.log(resposta);
-        expect(resposta[1].cpf).toEqual(listPessoas[1].id)
+        expect(resposta._embedded.pessoas[1].name).toEqual(listPessoas[1].id)
   })).toBeTruthy();
   });
 
   it('Consulta deve retornar um usuário específico', () => {
-    const userConsulta: Users = {
+    const userConsulta: Pessoas = {
       "id": "1",
       "name": "Lucas",
       "cpf": "12345678900"

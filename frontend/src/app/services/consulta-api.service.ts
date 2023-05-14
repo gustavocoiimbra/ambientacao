@@ -5,7 +5,6 @@ import { Users } from '../models/users.interface';
 import { Observable } from 'rxjs';
 import { Pessoas } from '../models/pessoa.interface';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +12,9 @@ export class ConsultaAPIService {
 
   private readonly API = "/pessoa";
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+  ) { }
 
   public getUsers(): Observable<Users> {
     return this.httpClient.get<Users>(this.API);
@@ -23,23 +24,23 @@ export class ConsultaAPIService {
     return this.httpClient.get<Pessoas>(`${this.API}/${id}`);
   }
 
-  public saveData(newPessoa: Pessoas): Observable<Pessoas> {
-    if(newPessoa.id) {
-      return this.update(newPessoa);
+  public saveData(registro: Pessoas): Observable<Pessoas> {
+    if(registro.id) {
+      return this.update(registro);
     }
-    return this.create(newPessoa);
+    return this.create(registro);
   }
 
-  private create(newPessoa: Partial<Pessoas>): Observable<Pessoas> {
-    console.log(this.httpClient.post<Pessoas>(this.API, newPessoa));
-    return this.httpClient.post<Pessoas>(this.API, newPessoa);
+  private create(registro: Partial<Pessoas>): Observable<Pessoas> {
+    return this.httpClient.post<Pessoas>(this.API, registro);
   }
 
-  private update(newPessoa: Partial<Pessoas>): Observable<Pessoas> {
-    return this.httpClient.put<Pessoas>(`${this.API}/${newPessoa.id}`, newPessoa);
+  private update(registro: Partial<Pessoas>): Observable<Pessoas> {
+    return this.httpClient.put<Pessoas>(`${this.API}/${registro.id}`, registro);
   }
 
   public delete(id: string): Observable<Object> {
     return this.httpClient.delete(`${this.API}/${id}`);
   }
+
 }

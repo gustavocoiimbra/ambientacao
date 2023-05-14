@@ -13,7 +13,7 @@ import br.ufg.inf.onboarding.repository.PessoaRepository;
 public class OnboardingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OnboardingApplication.class, args);
+		SpringApplication.run(OnboardingApplication.class, args);	
 	}
 
 	@Bean
@@ -30,7 +30,6 @@ public class OnboardingApplication {
 			j.setNome("Pedro Souza Silva");
 			j.setCpf("86495470100");
 			pessoaRepository.save(j);
-
 
 		}; 
 	}

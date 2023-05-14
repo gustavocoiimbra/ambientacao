@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Users } from 'src/app/models/users.interface';
 import { ConsultaAPIService } from 'src/app/services/consulta-api.service';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -57,6 +57,12 @@ export class TabelaComponent implements OnInit {
   }
 
   public carregarPessoas(): void {
-    this.dataUsers = this.consultaService.getUsers();
+    this.dataUsers = this.consultaService.getUsers().pipe(
+        catchError(error => {
+          console.log(error);
+          this.onError('Erro ao carregar cursos.');
+          return of()
+        })
+    );
   }
 }
