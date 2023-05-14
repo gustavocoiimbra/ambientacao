@@ -28,8 +28,12 @@ export class FormularioComponent implements OnInit {
 
   this.form = this.formBuilder.group({
       id: [null],
-      name: [null, [Validators.required]],
-      cpf: [null, Validators.compose([Validators.required, ValidarCpf.cpf])]
+      name: [null, [Validators.required, Validators.maxLength(50)]],
+      cpf: [null, Validators.compose([
+        Validators.required, 
+        ValidarCpf.cpf, 
+        Validators.maxLength(11), 
+      ])]
     });
   }
 

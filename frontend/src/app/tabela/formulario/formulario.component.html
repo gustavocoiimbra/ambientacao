@@ -6,17 +6,19 @@
     <form [formGroup]="form">
         <mat-card-content>
             <p>
-                <mat-form-field class="full-width">
+                <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Digite o nome</mat-label>
-                <input matInput formControlName="name">
+                <input matInput #input formControlName="name" required>
+                <mat-hint align="end">{{input.value.length}}/50</mat-hint>
                 <mat-error *ngIf="form.get('name')?.invalid">{{getErrorMessage('name')}}</mat-error>
                 </mat-form-field>
             </p>
     
             <p>
-                <mat-form-field class="full-width">
+                <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Digite o CPF</mat-label>
-                <input matInput formControlName="cpf">
+                <input matInput #input formControlName="cpf" required>
+                <mat-hint align="end">{{input.value.length}}/11</mat-hint>
                 <mat-error *ngIf="form.get('cpf')?.invalid">{{getErrorMessage('cpf')}}</mat-error>
                 </mat-form-field>
             </p>

@@ -14,7 +14,7 @@ import { PessoasListComponent } from './pessoas-list/pessoas-list.component';
   declarations: [
     TabelaComponent,
     FormularioComponent,
-    PessoasListComponent
+    PessoasListComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +22,7 @@ import { PessoasListComponent } from './pessoas-list/pessoas-list.component';
     AppMaterialModule,
     SharedModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class TabelaModule { }

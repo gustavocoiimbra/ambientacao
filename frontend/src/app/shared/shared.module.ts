@@ -4,13 +4,15 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
 import { AppMaterialModule } from './app-material/app-material.module';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CpfPipe } from './pipes/cpf.pipe';
 
 
 @NgModule({
   declarations: [
     ErrorDialogComponent,
     DialogComponent,
-    ProfileComponent
+    ProfileComponent,
+    CpfPipe
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { ProfileComponent } from './components/profile/profile.component';
   exports: [ 
     ErrorDialogComponent,
     DialogComponent,
-    ProfileComponent
+    ProfileComponent,
+    CpfPipe
   ]
 })
 export class SharedModule { }

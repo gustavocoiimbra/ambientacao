@@ -12,6 +12,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { MatTreeModule } from '@angular/material/tree';
     MatSnackBarModule,
     MatSortModule,
     MatPaginatorModule,
-    MatTreeModule
+    MatTreeModule,
+    MatTooltipModule
   ]
 })
 export class AppMaterialModule { }

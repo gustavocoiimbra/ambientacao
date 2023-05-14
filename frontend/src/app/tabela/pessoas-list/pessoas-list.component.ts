@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Pessoas } from 'src/app/models/pessoa.interface';
 import { Users } from 'src/app/models/users.interface';
+import { CpfPipe } from 'src/app/shared/pipes/cpf.pipe';
 
 @Component({
   selector: 'app-pessoas-list',
@@ -22,6 +23,7 @@ export class PessoasListComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(CpfPipe) cpf!: CpfPipe;
 
   ngOnInit(): void {
     this.datas = new MatTableDataSource(this.data._embedded.pessoas);

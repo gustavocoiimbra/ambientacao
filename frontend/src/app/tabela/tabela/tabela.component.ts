@@ -58,8 +58,7 @@ export class TabelaComponent implements OnInit {
 
   public carregarPessoas(): void {
     this.dataUsers = this.consultaService.getUsers().pipe(
-        catchError(error => {
-          console.log(error);
+        catchError(() => {
           this.onError('Erro ao carregar cursos.');
           return of()
         })

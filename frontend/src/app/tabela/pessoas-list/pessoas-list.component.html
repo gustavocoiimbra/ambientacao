@@ -13,15 +13,15 @@
     
         <ng-container matColumnDef="cpf" class="full-width">
             <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
-                <mat-cell *matCellDef="let datas">{{ datas.cpf }}</mat-cell>
+                <mat-cell *matCellDef="let datas">{{ datas.cpf | cpf}}</mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="actions" class="full-width">
             <mat-header-cell *matHeaderCellDef class="action-col">Ações</mat-header-cell>
     
             <mat-cell *matCellDef="let datas" class="action-col">
-                <button mat-icon-button color="primary" aria-label="Editar usuários"><mat-icon (click)="onEdit(datas)">edit</mat-icon></button>
-                <button mat-icon-button color="primary" aria-label="Excluir usuários"><mat-icon (click)="onDelete(datas)">delete</mat-icon></button>
+                <button mat-icon-button color="primary" matTooltip="Editar usuário"><mat-icon (click)="onEdit(datas)">edit</mat-icon></button>
+                <button mat-icon-button color="primary" matTooltip="Excluir usuário"><mat-icon (click)="onDelete(datas)">delete</mat-icon></button>
             </mat-cell>
             
         </ng-container>
