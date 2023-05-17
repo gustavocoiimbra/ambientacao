@@ -6,6 +6,7 @@ import org.springframework.data.rest.core.annotation.Description;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 
+
 @RepositoryRestResource(path = "pessoa", collectionResourceRel = "pessoas")
 @Description("Manutenção de pessoas")
 public interface PessoaRepository extends PagingAndSortingRepository<Pessoa,Integer> {

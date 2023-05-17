@@ -13,7 +13,7 @@ export class ConsultaAPIService {
   private readonly API = "/pessoa";
 
   constructor(
-    private httpClient: HttpClient,
+    private httpClient: HttpClient
   ) { }
 
   public getUsers(): Observable<Users> {
@@ -42,5 +42,39 @@ export class ConsultaAPIService {
   public delete(id: string): Observable<Object> {
     return this.httpClient.delete(`${this.API}/${id}`);
   }
+  
+  /* private construirTabela(dados: Users): Users {
+    let valuesTable: Users = this.obterTabelaPadrao();
+
+    valuesTable._embedded = {
+      pessoas: dados._embedded.pessoas
+    };
+    valuesTable._links = {
+      profile: dados._links.profile,
+      self: dados._links.self,
+      search: dados._links.search
+    }
+
+    return valuesTable;
+  } 
+
+  private obterTabelaPadrao(): Users {
+    return {
+      _embedded: {
+        pessoas: []
+      },
+      _links: {
+        profile: '',
+        search: '',
+        self: ''
+      },
+      page: {
+        number: 0,
+        size: 0,
+        totalElements: 0,
+        totalPage: 0
+      }
+    }
+  } */
 
 }

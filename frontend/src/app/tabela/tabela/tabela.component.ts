@@ -50,7 +50,7 @@ export class TabelaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if(result) {
-        this.consultaService.delete(data.id).subscribe(
+        this.consultaService.delete(data.id!).subscribe(
           () => this.carregarPessoas()
         );
     }});
